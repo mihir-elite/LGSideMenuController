@@ -76,21 +76,17 @@ LGSideMenuSwipeGestureRange LGSideMenuSwipeGestureRangeMake(CGFloat left, CGFloa
 @property (assign, nonatomic) CGSize savedSize;
 
 @property (strong, nonatomic) UIView             *rootViewStyleView;
-@property (strong, nonatomic) UIView             *rootViewCoverView;
-@property (strong, nonatomic) UIVisualEffectView *rootViewCoverEffectView;
+@property (strong, nonatomic) UIVisualEffectView *rootViewCoverView;
 
 @property (strong, nonatomic) UIView             *leftViewBackgroundColorView;
 @property (strong, nonatomic) UIImageView        *leftViewBackgroundImageView;
-@property (strong, nonatomic) UIView             *leftViewStyleView;
-@property (strong, nonatomic) UIVisualEffectView *leftViewStyleEffectView;
+@property (strong, nonatomic) UIVisualEffectView *leftViewStyleView;
 
 @property (strong, nonatomic) UIView             *rightViewBackgroundColorView;
 @property (strong, nonatomic) UIImageView        *rightViewBackgroundImageView;
-@property (strong, nonatomic) UIView             *rightViewStyleView;
-@property (strong, nonatomic) UIVisualEffectView *rightViewStyleEffectView;
+@property (strong, nonatomic) UIVisualEffectView *rightViewStyleView;
 
-@property (strong, nonatomic) UIView             *sideViewsCoverView;
-@property (strong, nonatomic) UIVisualEffectView *sideViewsCoverEffectView;
+@property (strong, nonatomic) UIVisualEffectView *sideViewsCoverView;
 
 @property (strong, nonatomic) NSNumber *leftViewGestireStartX;
 @property (strong, nonatomic) NSNumber *rightViewGestireStartX;
@@ -268,7 +264,7 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
 }
 
 - (void)setupDefaults {
-//    self.view.clipsToBounds = YES;
+    self.view.clipsToBounds = YES;
     self.view.backgroundColor = nil;
 
     self.tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture:)];
@@ -1393,11 +1389,6 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
     }
 
     if (self.rootViewCoverView) {
-        if (self.rootViewCoverEffectView) {
-            [self.rootViewCoverEffectView removeFromSuperview];
-            _rootViewCoverEffectView = nil;
-        }
-
         [self.rootViewCoverView removeFromSuperview];
         _rootViewCoverView = nil;
     }
@@ -1421,21 +1412,11 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
     }
 
     if (self.leftViewStyleView) {
-        if (self.leftViewStyleEffectView) {
-            [self.leftViewStyleEffectView removeFromSuperview];
-            _leftViewStyleEffectView = nil;
-        }
-
         [self.leftViewStyleView removeFromSuperview];
         _leftViewStyleView = nil;
     }
 
     if (self.sideViewsCoverView && !self.rightView) {
-        if (self.sideViewsCoverEffectView) {
-            [self.sideViewsCoverEffectView removeFromSuperview];
-            _sideViewsCoverEffectView = nil;
-        }
-
         [self.sideViewsCoverView removeFromSuperview];
         _sideViewsCoverView = nil;
     }
@@ -1469,21 +1450,11 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
     }
 
     if (self.rightViewStyleView) {
-        if (self.rightViewStyleEffectView) {
-            [self.rightViewStyleEffectView removeFromSuperview];
-            _rightViewStyleEffectView = nil;
-        }
-
         [self.rightViewStyleView removeFromSuperview];
         _rightViewStyleView = nil;
     }
 
     if (self.sideViewsCoverView && !self.leftView) {
-        if (self.sideViewsCoverEffectView) {
-            [self.sideViewsCoverEffectView removeFromSuperview];
-            _sideViewsCoverEffectView = nil;
-        }
-
         [self.sideViewsCoverView removeFromSuperview];
         _sideViewsCoverView = nil;
     }
@@ -1552,20 +1523,7 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
     // -----
 
     if (!self.rootViewCoverView) {
-        self.rootViewCoverView = [UIView new];
-    }
-
-    // -----
-
-    if (!self.rootViewCoverEffectView) {
-        if (self.rootViewCoverBlurEffectForLeftView || self.rootViewCoverBlurEffectForRightView) {
-            self.rootViewCoverEffectView = [UIVisualEffectView new];
-        }
-    }
-    else {
-        if (!self.rootViewCoverBlurEffectForLeftView && !self.rootViewCoverBlurEffectForRightView) {
-            self.rootViewCoverEffectView = nil;
-        }
+        self.rootViewCoverView = [UIVisualEffectView new];
     }
 
     // -----
@@ -1609,24 +1567,11 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
     // -----
 
     if (!self.leftViewStyleView) {
-        self.leftViewStyleView = [UIView new];
+        self.leftViewStyleView = [UIVisualEffectView new];
 //        self.leftViewStyleView.layer.masksToBounds = NO;
 //        self.leftViewStyleView.layer.shadowOffset = CGSizeZero;
 //        self.leftViewStyleView.layer.shadowOpacity = 1.0;
 //        self.leftViewStyleView.layer.shouldRasterize = YES;
-    }
-
-    // -----
-
-    if (!self.leftViewStyleEffectView) {
-        if (self.leftViewBackgroundBlurEffect) {
-            self.leftViewStyleEffectView = [UIVisualEffectView new];
-        }
-    }
-    else {
-        if (!self.leftViewBackgroundBlurEffect) {
-            self.leftViewStyleEffectView = nil;
-        }
     }
 
     // -----
@@ -1652,16 +1597,11 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
 
     if (self.leftViewPresentationStyle != LGSideMenuPresentationStyleSlideAbove) {
         if (!self.sideViewsCoverView) {
-            self.sideViewsCoverView = [UIView new];
-        }
-
-        if (!self.sideViewsCoverEffectView && self.leftViewCoverBlurEffect) {
-            self.sideViewsCoverEffectView = [UIVisualEffectView new];
+            self.sideViewsCoverView = [UIVisualEffectView new];
         }
     }
     else if (self.rightViewPresentationStyle == LGSideMenuPresentationStyleSlideAbove) {
         self.sideViewsCoverView = nil;
-        self.sideViewsCoverEffectView = nil;
     }
 
     // -----
@@ -1706,24 +1646,11 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
     // -----
 
     if (!self.rightViewStyleView) {
-        self.rightViewStyleView = [UIView new];
+        self.rightViewStyleView = [UIVisualEffectView new];
 //        self.rightViewStyleView.layer.masksToBounds = NO;
 //        self.rightViewStyleView.layer.shadowOffset = CGSizeZero;
 //        self.rightViewStyleView.layer.shadowOpacity = 1.0;
 //        self.rightViewStyleView.layer.shouldRasterize = YES;
-    }
-
-    // -----
-
-    if (!self.rightViewStyleEffectView) {
-        if (self.rightViewBackgroundBlurEffect) {
-            self.rightViewStyleEffectView = [UIVisualEffectView new];
-        }
-    }
-    else {
-        if (!self.rightViewBackgroundBlurEffect) {
-            self.rightViewStyleEffectView = nil;
-        }
     }
 
     // -----
@@ -1749,16 +1676,11 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
 
     if (self.rightViewPresentationStyle != LGSideMenuPresentationStyleSlideAbove) {
         if (!self.sideViewsCoverView) {
-            self.sideViewsCoverView = [UIView new];
-        }
-
-        if (!self.sideViewsCoverEffectView && self.rightViewCoverBlurEffect) {
-            self.sideViewsCoverEffectView = [UIVisualEffectView new];
+            self.sideViewsCoverView = [UIVisualEffectView new];
         }
     }
     else if (self.leftViewPresentationStyle == LGSideMenuPresentationStyleSlideAbove) {
         self.sideViewsCoverView = nil;
-        self.sideViewsCoverEffectView = nil;
     }
 
     // -----
@@ -1770,22 +1692,18 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
 - (void)viewsHierarchyValidate {
     [self.rootViewStyleView removeFromSuperview];
     [self.rootViewContainer removeFromSuperview];
-    [self.rootViewCoverEffectView removeFromSuperview];
     [self.rootViewCoverView removeFromSuperview];
 
     [self.leftViewBackgroundColorView removeFromSuperview];
     [self.leftViewBackgroundImageView removeFromSuperview];
-    [self.leftViewStyleEffectView removeFromSuperview];
     [self.leftViewStyleView removeFromSuperview];
     [self.leftViewContainer removeFromSuperview];
 
     [self.rightViewBackgroundColorView removeFromSuperview];
     [self.rightViewBackgroundImageView removeFromSuperview];
-    [self.rightViewStyleEffectView removeFromSuperview];
     [self.rightViewStyleView removeFromSuperview];
     [self.rightViewContainer removeFromSuperview];
 
-    [self.sideViewsCoverEffectView removeFromSuperview];
     [self.sideViewsCoverView removeFromSuperview];
 
     // -----
@@ -1803,10 +1721,6 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
 
         if (self.leftViewStyleView) {
             [self.view addSubview:self.leftViewStyleView];
-
-            if (self.leftViewStyleEffectView) {
-                [self.leftViewStyleView addSubview:self.leftViewStyleEffectView];
-            }
         }
 
         if (self.leftViewContainer) {
@@ -1827,10 +1741,6 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
 
         if (self.rightViewStyleView) {
             [self.view addSubview:self.rightViewStyleView];
-
-            if (self.rightViewStyleEffectView) {
-                [self.rightViewStyleView addSubview:self.rightViewStyleEffectView];
-            }
         }
 
         if (self.rightViewContainer) {
@@ -1843,10 +1753,6 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
     if (isSideViewAdded) {
         if (self.sideViewsCoverView) {
             [self.view addSubview:self.sideViewsCoverView];
-
-            if (self.sideViewsCoverEffectView) {
-                [self.sideViewsCoverView addSubview:self.sideViewsCoverEffectView];
-            }
         }
     }
 
@@ -1860,19 +1766,11 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
 
     if (self.rootViewCoverView) {
         [self.view addSubview:self.rootViewCoverView];
-
-        if (self.rootViewCoverEffectView) {
-            [self.rootViewCoverView addSubview:self.rootViewCoverEffectView];
-        }
     }
 
     if (self.leftViewPresentationStyle == LGSideMenuPresentationStyleSlideAbove) {
         if (self.leftViewStyleView) {
             [self.view addSubview:self.leftViewStyleView];
-
-            if (self.leftViewStyleEffectView) {
-                [self.leftViewStyleView addSubview:self.leftViewStyleEffectView];
-            }
         }
 
         if (self.leftViewContainer) {
@@ -1883,10 +1781,6 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
     if (self.rightViewPresentationStyle == LGSideMenuPresentationStyleSlideAbove) {
         if (self.rightViewStyleView) {
             [self.view addSubview:self.rightViewStyleView];
-
-            if (self.rightViewStyleEffectView) {
-                [self.rightViewStyleView addSubview:self.rightViewStyleEffectView];
-            }
         }
 
         if (self.rightViewContainer) {
@@ -1978,7 +1872,6 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
     // -----
 
     self.rootViewCoverView.frame = rootViewFrame;
-    self.rootViewCoverEffectView.frame = self.rootViewCoverView.bounds;
     self.rootViewCoverView.transform = transform;
 
     if (self.leftView && self.isLeftViewVisible) {
@@ -2066,7 +1959,6 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
                                                   CGRectGetMinY(leftViewFrame)-borderWidth,
                                                   CGRectGetWidth(leftViewFrame)+borderWidth*2,
                                                   CGRectGetHeight(leftViewFrame)+borderWidth*2);
-        self.leftViewStyleEffectView.frame = self.leftViewStyleView.bounds;
         self.leftViewStyleView.transform = leftViewTransform;
     }
 
@@ -2078,7 +1970,6 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
         }
 
         self.sideViewsCoverView.frame = CGRectMake(0.0, 0.0, frameWidth, frameHeight);
-        self.sideViewsCoverEffectView.frame = self.sideViewsCoverView.bounds;
     }
 }
 
@@ -2159,7 +2050,6 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
                                                    CGRectGetMinY(rightViewFrame)-borderWidth,
                                                    CGRectGetWidth(rightViewFrame)+borderWidth*2,
                                                    CGRectGetHeight(rightViewFrame)+borderWidth*2);
-        self.rightViewStyleEffectView.frame = self.rightViewStyleView.bounds;
         self.rightViewStyleView.transform = rightViewTransform;
     }
 
@@ -2171,7 +2061,6 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
         }
 
         self.sideViewsCoverView.frame = CGRectMake(0.0, 0.0, frameWidth, frameHeight);
-        self.sideViewsCoverEffectView.frame = self.sideViewsCoverView.bounds;
     }
 }
 
@@ -2186,13 +2075,11 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
     if (self.isLeftViewAlwaysVisibleForCurrentOrientation || self.isLeftViewVisible) {
         if (!self.isLeftViewAlwaysVisibleForCurrentOrientation) {
             self.rootViewCoverView.backgroundColor = self.rootViewCoverColorForLeftView;
-
-            self.rootViewCoverEffectView.effect = self.rootViewCoverBlurEffectForLeftView;
+            self.rootViewCoverView.effect = self.rootViewCoverBlurEffectForLeftView;
 
             if (self.sideViewsCoverView) {
                 self.sideViewsCoverView.backgroundColor = self.leftViewCoverColor;
-
-                self.sideViewsCoverEffectView.effect = self.leftViewCoverBlurEffect;
+                self.sideViewsCoverView.effect = self.leftViewCoverBlurEffect;
             }
         }
 
@@ -2203,8 +2090,7 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
 //            self.leftViewStyleView.layer.shadowColor = self.leftViewLayerShadowColor.CGColor;
 //            self.leftViewStyleView.layer.shadowRadius = self.leftViewLayerShadowRadius;
             self.leftViewStyleView.alpha = self.leftViewBackgroundAlpha;
-
-            self.leftViewStyleEffectView.effect = self.leftViewBackgroundBlurEffect;
+            self.leftViewStyleView.effect = self.leftViewBackgroundBlurEffect;
         }
 
         if (self.leftViewBackgroundColorView) {
@@ -2219,13 +2105,11 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
     if (self.isRightViewAlwaysVisibleForCurrentOrientation || self.isRightViewVisible) {
         if (!self.isRightViewAlwaysVisibleForCurrentOrientation) {
             self.rootViewCoverView.backgroundColor = self.rootViewCoverColorForRightView;
-
-            self.rootViewCoverEffectView.effect = self.rootViewCoverBlurEffectForRightView;
+            self.rootViewCoverView.effect = self.rootViewCoverBlurEffectForRightView;
 
             if (self.sideViewsCoverView) {
                 self.sideViewsCoverView.backgroundColor = self.rightViewCoverColor;
-
-                self.sideViewsCoverEffectView.effect = self.rightViewCoverBlurEffect;
+                self.sideViewsCoverView.effect = self.rightViewCoverBlurEffect;
             }
         }
 
@@ -2236,8 +2120,7 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
 //            self.rightViewStyleView.layer.shadowColor = self.rightViewLayerShadowColor.CGColor;
 //            self.rightViewStyleView.layer.shadowRadius = self.rightViewLayerShadowRadius;
             self.rightViewStyleView.alpha = self.rightViewBackgroundAlpha;
-
-            self.rightViewStyleEffectView.effect = self.rightViewBackgroundBlurEffect;
+            self.rightViewStyleView.effect = self.rightViewBackgroundBlurEffect;
         }
 
         if (self.rightViewBackgroundColorView) {
