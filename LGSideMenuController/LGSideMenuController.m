@@ -1094,54 +1094,6 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
     [self rightViewsLayoutValidate];
 }
 
-- (void)setRootViewCoverBlurEffectForLeftView:(UIBlurEffect *)rootViewCoverBlurEffectForLeftView {
-    if (_rootViewCoverBlurEffectForLeftView == rootViewCoverBlurEffectForLeftView) return;
-
-    _rootViewCoverBlurEffectForLeftView = rootViewCoverBlurEffectForLeftView;
-    [self rootViewsValidate];
-    [self viewsHierarchyValidate];
-}
-
-- (void)setRootViewCoverBlurEffectForRightView:(UIBlurEffect *)rootViewCoverBlurEffectForRightView {
-    if (_rootViewCoverBlurEffectForRightView == rootViewCoverBlurEffectForRightView) return;
-
-    _rootViewCoverBlurEffectForRightView = rootViewCoverBlurEffectForRightView;
-    [self rootViewsValidate];
-    [self viewsHierarchyValidate];
-}
-
-- (void)setLeftViewBackgroundBlurEffect:(UIBlurEffect *)leftViewBackgroundBlurEffect {
-    if (_leftViewBackgroundBlurEffect == leftViewBackgroundBlurEffect) return;
-
-    _leftViewBackgroundBlurEffect = leftViewBackgroundBlurEffect;
-    [self leftViewsValidate];
-    [self viewsHierarchyValidate];
-}
-
-- (void)setRightViewBackgroundBlurEffect:(UIBlurEffect *)rightViewBackgroundBlurEffect {
-    if (_rightViewBackgroundBlurEffect == rightViewBackgroundBlurEffect) return;
-
-    _rightViewBackgroundBlurEffect = rightViewBackgroundBlurEffect;
-    [self rightViewsValidate];
-    [self viewsHierarchyValidate];
-}
-
-- (void)setLeftViewCoverBlurEffect:(UIBlurEffect *)leftViewCoverBlurEffect {
-    if (_leftViewCoverBlurEffect == leftViewCoverBlurEffect) return;
-
-    _leftViewCoverBlurEffect = leftViewCoverBlurEffect;
-    [self leftViewsValidate];
-    [self viewsHierarchyValidate];
-}
-
-- (void)setRightViewCoverBlurEffect:(UIBlurEffect *)rightViewCoverBlurEffect {
-    if (_rightViewCoverBlurEffect == rightViewCoverBlurEffect) return;
-
-    _rightViewCoverBlurEffect = rightViewCoverBlurEffect;
-    [self rightViewsValidate];
-    [self viewsHierarchyValidate];
-}
-
 #pragma mark -
 
 - (void)setRootViewContainer:(LGSideMenuView *)rootViewContainer {
